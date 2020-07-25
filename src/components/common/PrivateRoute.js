@@ -1,3 +1,5 @@
+//! Built-in or Third Party Packages
+
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -31,15 +33,3 @@ function PrivateRoute({ component: Component, ...rest }) {
 }
 const mapStateToProps = (state) => ({});
 export default connect(mapStateToProps)(PrivateRoute);
-/*
-<Route
-  {...rest}
-  render={(props) => {
-    if (props.auth.isAuthenticated) {
-      return <Redirect to="/login" />;
-    } else {
-      return <Component {...props} />;
-    }
-  }}
-/>
-*/
