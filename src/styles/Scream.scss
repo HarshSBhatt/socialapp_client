@@ -9,6 +9,21 @@
       &-content {
         .ant-list-item-meta-title {
           margin-bottom: 4px;
+          a {
+            .username {
+              display: flex;
+              p {
+                display: flex;
+                align-items: center;
+                margin: 0;
+                margin-right: 4px;
+                svg {
+                  width: 16px;
+                  height: 16px;
+                }
+              }
+            }
+          }
         }
       }
     }

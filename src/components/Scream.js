@@ -2,6 +2,10 @@ import React from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
+//! User Files
+
+import { ReactComponent as VerifiedIcon } from "../assets/verified_badge.svg";
+
 //! Ant Design imports
 
 import { List, Avatar, Space } from "antd";
@@ -59,7 +63,12 @@ function Scream({ scream }) {
               </Avatar>
             }
             title={
-              <Link to={`user/${item.userHandle}`}>{item.userHandle}</Link>
+              <Link to={`user/${item.userHandle}`}>
+                <div className="username">
+                  <p>{item.userHandle}</p>{" "}
+                  <p>{item.isVerified && <VerifiedIcon />}</p>
+                </div>
+              </Link>
             }
             description={dayjs(item.createdAt).fromNow()}
           />

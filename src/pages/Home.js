@@ -34,6 +34,7 @@ const Home = () => {
           commentCount: 0,
           createdAt: "2020-08-09T10:15:33.259Z",
           userHandle: "harsh.bhatt",
+          isVerified: true,
           userImage:
             "https://firebasestorage.googleapis.com/v0/b/socialapp-bf0a5.appspot.com/o/62458710.jpg?alt=media",
         },
