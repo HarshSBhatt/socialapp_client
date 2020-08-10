@@ -1,0 +1,19 @@
+.scream-list-content {
+  .ant-list-item-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    .ant-list-item-meta {
+      flex: unset;
+      margin-bottom: 8px;
+      &-content {
+        .ant-list-item-meta-title {
+          margin-bottom: 4px;
+        }
+      }
+    }
+    .ant-list-item-action {
+      margin: 0;
+    }
+  }
+}

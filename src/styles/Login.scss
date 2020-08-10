@@ -1,0 +1,30 @@
+.form-wrapper {
+  .ant-form {
+    .app-logo,
+    .ant-alert {
+      margin-bottom: 2rem;
+    }
+    .form-flow {
+      .ant-col {
+        .ant-form-item-control-input {
+          .ant-form-item-control-input-content {
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+      }
+    }
+    .ant-row {
+      .ant-col {
+        .ant-form-item-control-input {
+          .ant-form-item-control-input-content {
+            .login-form-button {
+              width: 100%;
+              margin-bottom: 0.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
