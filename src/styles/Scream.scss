@@ -12,6 +12,9 @@
           a {
             .username {
               display: flex;
+              .verified-badge {
+                margin-top: 2.5px;
+              }
               p {
                 display: flex;
                 align-items: center;

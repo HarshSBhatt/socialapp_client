@@ -66,7 +66,9 @@ function Scream({ scream }) {
               <Link to={`user/${item.userHandle}`}>
                 <div className="username">
                   <p>{item.userHandle}</p>{" "}
-                  <p>{item.isVerified && <VerifiedIcon />}</p>
+                  <p className="verified-badge">
+                    {item.isVerified && <VerifiedIcon />}
+                  </p>
                 </div>
               </Link>
             }

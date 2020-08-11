@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { Link, Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
+
+//! User Files
+
+import { loginUser } from "../store/actions";
+import { getRedirectionPath } from "../utils/getRedirectionPath";
 
 //! Ant Design Imports
 
@@ -13,29 +18,26 @@ import {
   EyeTwoTone,
 } from "@ant-design/icons";
 
-const Login = () => {
-  const [loading, setLoading] = useState(false);
+const Login = (props) => {
   const [error, setError] = useState({});
 
+  useEffect(() => {
+    if (props.userReducer.errMess) {
+      setError(props.userReducer.errMess);
+    }
+  }, [props.userReducer.errMess]);
+
   const onFinish = (values) => {
-    setLoading(true);
-    axios
-      .post("/login", values)
-      .then((res) => {
-        setLoading(false);
-        setError({});
-        console.log(res.data);
-      })
-      .catch((err) => {
-        setLoading(false);
-        setError(err.response.data);
-      });
+    props.loginUser(values);
   };
 
   const onClose = () => {
     setError({});
   };
-
+  if (props.userReducer.isAuthenticated) {
+    const redirectPath = getRedirectionPath(props.location);
+    return <Redirect to={redirectPath} />;
+  }
   return (
     <Row>
       <Col xs={{ span: 24 }} sm={{ span: 6 }} lg={{ span: 8 }}></Col>
@@ -114,11 +116,11 @@ const Login = () => {
               htmlType="submit"
               className="login-form-button"
               size="large"
-              loading={loading}
+              loading={props.userReducer.isLoading}
             >
               Log in
             </Button>
-            Or <Link to="/signup">register now!</Link>
+            Don't have an account? <Link to="/signup">register now!</Link>
           </Form.Item>
         </Form>
       </Col>
@@ -127,8 +129,17 @@ const Login = () => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+Login.propTypes = {
+  userReducer: PropTypes.object.isRequired,
+  loginUser: PropTypes.func.isRequired,
+};
 
-const mapDispatchToProps = {};
+const mapStateToProps = (state) => ({
+  userReducer: state.userReducer,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loginUser: (userData) => dispatch(loginUser(userData)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
