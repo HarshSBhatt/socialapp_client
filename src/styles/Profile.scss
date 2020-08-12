@@ -1,0 +1,73 @@
+@import "./Variables.scss";
+
+.profile-wrapper {
+  .profile-card {
+    .ant-card-cover {
+      img {
+        background-color: $gray;
+        height: 300px;
+        object-fit: cover;
+      }
+      .avatar-uploader {
+        .ant-upload {
+          span {
+            img {
+              background-color: $gray;
+              height: 300px;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+    }
+    .ant-card-body {
+      .ant-card-meta {
+        &-detail {
+          .ant-card-meta-description {
+            .ant-descriptions-item-content {
+              color: $secondary-color-text;
+            }
+            .ant-descriptions-item {
+              .ant-descriptions-item-content {
+                display: flex;
+                align-items: center;
+                span {
+                  display: flex;
+                  align-items: center;
+                  margin-right: 0.5rem;
+                  svg {
+                    height: 16px;
+                  }
+                }
+              }
+            }
+          }
+          .ant-card-meta-title {
+            .username {
+              display: flex;
+              a {
+                .user-handle {
+                  color: $black;
+                  transition: all 0.3s ease-in-out;
+                  &:hover {
+                    color: $primary-color;
+                  }
+                }
+              }
+              p {
+                display: flex;
+                align-items: center;
+                margin: 0;
+                margin-right: 4px;
+                svg {
+                  width: 16px;
+                  height: 16px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

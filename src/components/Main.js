@@ -6,25 +6,12 @@ import { withRouter } from "react-router-dom";
 
 //! User Files
 
-import { incrementCounter, decrementCounter } from "../store/actions";
-
 function Main(props) {
-  return (
-    <div>
-      <p>{props.counter.count}</p>
-      <button onClick={() => props.incrementCounter()}>Increment</button>
-      <button onClick={() => props.decrementCounter()}>Decrement</button>
-    </div>
-  );
+  return <div>Harsh</div>;
 }
 
-const mapStateToProps = (state) => ({
-  counter: state.counter,
-});
+const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) => ({
-  incrementCounter: () => dispatch(incrementCounter()),
-  decrementCounter: () => dispatch(decrementCounter()),
-});
+const mapDispatchToProps = (dispatch) => ({});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

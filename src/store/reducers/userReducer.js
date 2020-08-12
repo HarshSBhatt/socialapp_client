@@ -3,8 +3,9 @@ import isEmpty from "../../utils/is-empty";
 
 const initialState = {
   isLoading: false,
+  isProfileLoading: false,
   isAuthenticated: false,
-  token: localStorage.getItem("token"),
+  token: localStorage.getItem("authToken"),
   user: {},
   userData: {},
   errMess: null,
@@ -17,6 +18,7 @@ export const UserReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+        isProfileLoading: true,
         isAuthenticated: false,
       };
     case ActionTypes.SIGNUP_SUCCESS:
@@ -32,6 +34,7 @@ export const UserReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        isProfileLoading: false,
         isAuthenticated: false,
         errMess: action.message,
       };
@@ -42,6 +45,7 @@ export const UserReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+        isProfileLoading: true,
         isAuthenticated: false,
       };
     case ActionTypes.LOGIN_SUCCESS:
@@ -57,6 +61,7 @@ export const UserReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        isProfileLoading: false,
         isAuthenticated: false,
         errMess: action.message,
       };
@@ -73,6 +78,7 @@ export const UserReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        isProfileLoading: false,
         isAuthenticated: false,
         token: "",
         user: null,
@@ -87,10 +93,22 @@ export const UserReducer = (state = initialState, action) => {
         isAuthenticated: !isEmpty(action.payload),
         user: action.payload,
       };
+    case ActionTypes.FETCH_USER_DATA_REQUEST:
+      return {
+        ...state,
+        isProfileLoading: true,
+      };
     case ActionTypes.SET_USER_DATA:
       return {
         ...state,
+        isProfileLoading: false,
         userData: action.payload,
+      };
+    case ActionTypes.FETCH_USER_DATA_FAILED:
+      return {
+        ...state,
+        isProfileLoading: false,
+        userData: null,
       };
     default:
       return state;

@@ -7,7 +7,7 @@
 }
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif !important;
   /* font-family: "Helvetica", sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -21,4 +21,10 @@ code {
 
 .tox-statusbar {
   display: none !important;
+}
+
+/*! Overwrite CSS  */
+
+.ant-notification-notice-message {
+  font-size: 14px !important;
 }

@@ -1,0 +1,33 @@
+.home-wrapper {
+  display: flex;
+  justify-content: space-around;
+  .home-left {
+    width: 22%;
+  }
+  .home-middle {
+    width: 50%;
+  }
+  .home-right {
+    width: 22%;
+  }
+}
+@media screen and (max-width: 800px) {
+  .home-wrapper {
+    flex-direction: column-reverse;
+    padding: 0.5rem;
+    .home-left {
+      display: none;
+    }
+    .home-middle {
+      width: 100%;
+    }
+    .home-right {
+      width: 100%;
+      div {
+        div {
+          position: relative !important;
+        }
+      }
+    }
+  }
+}

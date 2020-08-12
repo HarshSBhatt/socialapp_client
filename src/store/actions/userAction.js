@@ -97,6 +97,12 @@ export const loginUser = (userData) => (dispatch) => {
 
 //! Get User Data
 
+export const requestForUserData = () => {
+  return {
+    type: ActionTypes.FETCH_USER_DATA_REQUEST,
+  };
+};
+
 export const setUserData = (userData) => {
   return {
     type: ActionTypes.SET_USER_DATA,
@@ -104,7 +110,15 @@ export const setUserData = (userData) => {
   };
 };
 
+export const failedToSetUserData = (message) => {
+  return {
+    type: ActionTypes.FETCH_USER_DATA_FAILED,
+    message,
+  };
+};
+
 export const getUserData = () => (dispatch) => {
+  dispatch(requestForUserData());
   axios
     .get("/user")
     .then((res) => {
@@ -112,6 +126,7 @@ export const getUserData = () => (dispatch) => {
     })
     .catch((err) => {
       console.log(err);
+      dispatch(failedToSetUserData(err.response.data));
     });
 };
 
@@ -134,4 +149,17 @@ export const logoutUser = () => (dispatch) => {
   dispatch(requestLogout());
   localStorage.removeItem("authToken");
   dispatch(receiveLogout());
+};
+
+//! Upload Profile Picture
+
+export const uploadImage = (formData) => (dispatch) => {
+  axios
+    .post("/user/image", formData)
+    .then(() => {
+      dispatch(getUserData());
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };

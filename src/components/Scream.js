@@ -25,7 +25,6 @@ function Scream({ scream }) {
       className="scream-list"
       itemLayout="vertical"
       size="large"
-      bordered
       dataSource={scream}
       renderItem={(item) => (
         <List.Item
@@ -48,13 +47,6 @@ function Scream({ scream }) {
               key="list-vertical-message"
             />,
           ]}
-          extra={
-            <img
-              width={250}
-              alt="logo"
-              src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-            />
-          }
         >
           <List.Item.Meta
             avatar={
@@ -67,7 +59,7 @@ function Scream({ scream }) {
                 <div className="username">
                   <p>{item.userHandle}</p>{" "}
                   <p className="verified-badge">
-                    {item.isVerified && <VerifiedIcon />}
+                    {item.isVerifiedUser && <VerifiedIcon />}
                   </p>
                 </div>
               </Link>
