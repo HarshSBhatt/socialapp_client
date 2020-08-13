@@ -3,6 +3,7 @@ import jwt_decode from "jwt-decode";
 
 import * as ActionTypes from "../actionTypes";
 import { setAuthHeader } from "../../utils/setAuthHeader";
+import { openNotificationWithIcon } from "../../utils/CustomNotification";
 
 export const setCurrentUser = (decoded) => {
   return {
@@ -126,7 +127,25 @@ export const getUserData = () => (dispatch) => {
     })
     .catch((err) => {
       console.log(err);
-      dispatch(failedToSetUserData(err.response.data));
+      dispatch(failedToSetUserData(err.response));
+    });
+};
+
+//! Edit User Details
+
+export const editUserDetails = (userDetails) => (dispatch) => {
+  axios
+    .post("/user", userDetails)
+    .then(() => {
+      dispatch(getUserData());
+      openNotificationWithIcon("success", "Profile updated successfully");
+    })
+    .catch((err) => {
+      console.log(err);
+      openNotificationWithIcon(
+        "error",
+        "Something went wrong. Please try again later!"
+      );
     });
 };
 
@@ -158,8 +177,10 @@ export const uploadImage = (formData) => (dispatch) => {
     .post("/user/image", formData)
     .then(() => {
       dispatch(getUserData());
+      openNotificationWithIcon("success", "Image uploaded successfully");
     })
     .catch((err) => {
       console.log(err);
+      openNotificationWithIcon("error", "Image upload failed.");
     });
 };

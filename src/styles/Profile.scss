@@ -1,12 +1,45 @@
 @import "./Variables.scss";
 
 .profile-wrapper {
+  .ant-card-body {
+    .ant-typography {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .auth-options {
+      display: flex;
+      justify-content: space-between;
+      button {
+        width: 120px;
+      }
+    }
+  }
   .profile-card {
     .ant-card-cover {
-      img {
+      .picture-wrapper {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
         background-color: $gray;
-        height: 300px;
-        object-fit: cover;
+        img {
+          background-color: $gray;
+          height: 150px;
+          width: 150px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+        span {
+          position: absolute;
+          bottom: 30px;
+          left: 210px;
+          svg {
+            color: $primary-color;
+            fill: $gray;
+          }
+        }
       }
       .avatar-uploader {
         .ant-upload {
@@ -31,12 +64,27 @@
               .ant-descriptions-item-content {
                 display: flex;
                 align-items: center;
+                .ant-btn {
+                  margin-top: 1rem;
+                  width: 100%;
+                  span {
+                    justify-content: center;
+                    margin: 0;
+                  }
+                }
                 span {
                   display: flex;
                   align-items: center;
                   margin-right: 0.5rem;
+                  a {
+                    color: $secondary-color-text;
+                    &:hover {
+                      color: $primary-color;
+                    }
+                  }
                   svg {
                     height: 16px;
+                    color: $primary-color;
                   }
                 }
               }
