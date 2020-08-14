@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 
 import { ReactComponent as VerifiedIcon } from "../assets/verified_badge.svg";
 import { likeScream, unlikeScream } from "../store/actions";
+import DeleteScream from "./DeleteScream";
 
 //! Ant Design imports
 
@@ -18,20 +19,15 @@ import { Link } from "react-router-dom";
 const PRIMARY_COLOR = "#00bcd4";
 
 function Scream(props) {
-  const { isAuthenticated } = props.userReducer;
-
+  console.log(props.isLikeUnlikeRunning);
+  const { isAuthenticated, userData } = props.userReducer;
   dayjs.extend(relativeTime);
-
-  if (props.loading) return <p>Loading Screams...</p>;
 
   const LikeButton = ({ screamId }) => {
     const likedScream = () => {
       if (
-        props.userReducer.userData &&
-        props.userReducer.userData.likes &&
-        props.userReducer.userData.likes.find(
-          (like) => like.screamId === screamId
-        )
+        userData.likes &&
+        userData.likes.find((like) => like.screamId === screamId)
       ) {
         return true;
       } else {
@@ -40,12 +36,10 @@ function Scream(props) {
     };
 
     const likeScream = () => {
-      console.log("like");
       props.likeScream(screamId);
     };
 
     const unlikeScream = () => {
-      console.log("unlike");
       props.unlikeScream(screamId);
     };
 
@@ -64,6 +58,15 @@ function Scream(props) {
     );
   };
 
+  const DeleteButton = ({ userHandle, screamId }) => {
+    return (
+      isAuthenticated &&
+      userHandle === userData.credentials.handle && (
+        <DeleteScream screamId={screamId} />
+      )
+    );
+  };
+  if (props.loading) return <p>Loading Screams...</p>;
   return (
     <List
       className="scream-list"
@@ -92,14 +95,22 @@ function Scream(props) {
               </Avatar>
             }
             title={
-              <Link to={`user/${item.userHandle}`}>
-                <div className="username">
-                  <p>{item.userHandle}</p>{" "}
-                  <p className="verified-badge">
-                    {item.isVerifiedUser && <VerifiedIcon />}
-                  </p>
+              <div className="username">
+                <Link to={`user/${item.userHandle}`}>
+                  <div className="user-info">
+                    <p>{item.userHandle}</p>{" "}
+                    <p className="verified-badge">
+                      {item.isVerifiedUser && <VerifiedIcon />}
+                    </p>
+                  </div>
+                </Link>
+                <div className="user-actions">
+                  <DeleteButton
+                    userHandle={item.userHandle}
+                    screamId={item.screamId}
+                  />
                 </div>
-              </Link>
+              </div>
             }
             description={dayjs(item.createdAt).fromNow()}
           />
@@ -116,10 +127,13 @@ Scream.propTypes = {
   likeScream: PropTypes.func.isRequired,
   unlikeScream: PropTypes.func.isRequired,
   userReducer: PropTypes.object.isRequired,
+
+  isLikeUnlikeRunning: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   userReducer: state.userReducer,
+  isLikeUnlikeRunning: state.dataReducer.isLikeUnlikeRunning,
 });
 
 const mapDispatchToProps = {

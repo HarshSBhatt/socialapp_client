@@ -4,6 +4,7 @@ const initialState = {
   isLoading: false,
   scream: {},
   screams: [],
+  isLikeUnlikeRunning: false,
   error: null,
 };
 
@@ -32,15 +33,38 @@ export const DataReducer = (state = initialState, action) => {
 
     //! Like or Unlike screams
 
+    case ActionTypes.LIKEUNLIKE_REQUEST:
+      return {
+        ...state,
+        isLikeUnlikeRunning: true,
+      };
     case ActionTypes.LIKE_SCREAM:
     case ActionTypes.UNLIKE_SCREAM:
-      let index = state.screams.findIndex(
+      const likeUnlikeIndex = state.screams.findIndex(
         (scream) => scream.screamId === action.payload.screamId
       );
-      state.screams[index] = action.payload;
+      state.screams[likeUnlikeIndex] = action.payload;
 
       return {
         ...state,
+        isLikeUnlikeRunning: false,
+      };
+
+    case ActionTypes.LIKEUNLIKE_FAILED:
+      return {
+        ...state,
+        isLikeUnlikeRunning: false,
+        error: action.error,
+      };
+
+    //! Delete Scream
+
+    case ActionTypes.DELETE_SCREAM_SUCCESS:
+      return {
+        ...state,
+        screams: state.screams.filter(
+          (scream) => scream.screamId !== action.payload
+        ),
       };
 
     default:

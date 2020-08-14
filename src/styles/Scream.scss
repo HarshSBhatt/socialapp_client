@@ -30,20 +30,24 @@
       &-content {
         .ant-list-item-meta-title {
           margin-bottom: 4px;
-          a {
-            .username {
-              display: flex;
-              .verified-badge {
-                margin-top: 2.5px;
-              }
-              p {
+          .username {
+            display: flex;
+            justify-content: space-between;
+            a {
+              .user-info {
                 display: flex;
-                align-items: center;
-                margin: 0;
-                margin-right: 4px;
-                svg {
-                  width: 16px;
-                  height: 16px;
+                .verified-badge {
+                  margin-top: 2.5px;
+                }
+                p {
+                  display: flex;
+                  align-items: center;
+                  margin: 0;
+                  margin-right: 4px;
+                  svg {
+                    width: 16px;
+                    height: 16px;
+                  }
                 }
               }
             }

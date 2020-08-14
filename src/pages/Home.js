@@ -21,10 +21,14 @@ const Home = (props) => {
     <div className="home-wrapper">
       <div className="home-left"></div>
       <div className="home-middle">
-        <Scream
-          screams={props.dataReducer.screams}
-          loading={props.dataReducer.isLoading}
-        />
+        {!props.isProfileLoading ? (
+          <Scream
+            screams={props.dataReducer.screams}
+            loading={props.dataReducer.isLoading}
+          />
+        ) : (
+          <p>Loading Data....</p>
+        )}
       </div>
       <div className="home-right">
         {/* {window.innerWidth > 1000 && ( */}
@@ -40,10 +44,12 @@ const Home = (props) => {
 Home.propTypes = {
   getScreams: PropTypes.func.isRequired,
   dataReducer: PropTypes.object.isRequired,
+  isProfileLoading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   dataReducer: state.dataReducer,
+  isProfileLoading: state.userReducer.isProfileLoading,
 });
 
 const mapDispatchToProps = { getScreams };

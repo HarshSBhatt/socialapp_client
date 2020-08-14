@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import * as ActionTypes from "../actionTypes";
+import { openNotificationWithIcon } from "../../utils/CustomNotification";
 
 //! Get all screams
 
@@ -38,6 +39,19 @@ export const getScreams = () => (dispatch) => {
 
 //! Like Screams
 
+export const likeUnlikeRequest = () => {
+  return {
+    type: ActionTypes.LIKEUNLIKE_REQUEST,
+  };
+};
+
+export const likeUnlikeFailed = (error) => {
+  return {
+    type: ActionTypes.LIKEUNLIKE_FAILED,
+    error,
+  };
+};
+
 export const successToLikeScream = (data) => {
   return {
     type: ActionTypes.LIKE_SCREAM,
@@ -46,6 +60,7 @@ export const successToLikeScream = (data) => {
 };
 
 export const likeScream = (screamId) => (dispatch) => {
+  dispatch(likeUnlikeRequest());
   axios
     .get(`/scream/${screamId}/like`)
     .then((res) => {
@@ -53,6 +68,7 @@ export const likeScream = (screamId) => (dispatch) => {
     })
     .catch((err) => {
       console.log(err);
+      dispatch(likeUnlikeFailed(err.response.data));
     });
 };
 
@@ -66,6 +82,7 @@ export const successToUnlikeScream = (data) => {
 };
 
 export const unlikeScream = (screamId) => (dispatch) => {
+  dispatch(likeUnlikeRequest());
   axios
     .get(`/scream/${screamId}/unlike`)
     .then((res) => {
@@ -73,5 +90,31 @@ export const unlikeScream = (screamId) => (dispatch) => {
     })
     .catch((err) => {
       console.log(err);
+      dispatch(likeUnlikeFailed(err.response.data));
+    });
+};
+
+//! Delete Scream
+
+export const receiveDelete = (screamId) => {
+  return {
+    type: ActionTypes.DELETE_SCREAM_SUCCESS,
+    payload: screamId,
+  };
+};
+
+export const deleteScream = (screamId) => (dispatch) => {
+  axios
+    .delete(`/scream/${screamId}`)
+    .then(() => {
+      dispatch(receiveDelete(screamId));
+      openNotificationWithIcon("success", "Post deleted successfully!");
+    })
+    .catch((err) => {
+      console.log(err);
+      openNotificationWithIcon(
+        "error",
+        "Something went wrong. Please try again later!"
+      );
     });
 };
