@@ -17,27 +17,29 @@
   .profile-card {
     .ant-card-cover {
       .picture-wrapper {
-        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         height: 200px;
         background-color: $gray;
-        img {
-          background-color: $gray;
-          height: 150px;
-          width: 150px;
-          border-radius: 50%;
-          object-fit: cover;
-        }
-        span {
-          position: absolute;
-          bottom: 30px;
-          left: 210px;
-          svg {
-            color: $primary-color;
-            fill: $gray;
+        .user-avatar {
+          position: relative;
+          img {
+            background-color: $gray;
+            height: 150px;
+            width: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+          span {
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+            svg {
+              color: $primary-color;
+              fill: $gray;
+            }
           }
         }
       }

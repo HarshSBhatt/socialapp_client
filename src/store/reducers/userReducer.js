@@ -110,6 +110,35 @@ export const UserReducer = (state = initialState, action) => {
         isProfileLoading: false,
         userData: null,
       };
+
+    //! Like or Unlike screams
+
+    case ActionTypes.LIKE_SCREAM:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          likes: [
+            ...state.userData.likes,
+            {
+              userHandle: state.userData.credentials.handle,
+              screamId: action.payload.screamId,
+            },
+          ],
+        },
+      };
+
+    case ActionTypes.UNLIKE_SCREAM:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          likes: state.userData.likes.filter(
+            (like) => like.screamId !== action.payload.screamId
+          ),
+        },
+      };
+
     default:
       return state;
   }

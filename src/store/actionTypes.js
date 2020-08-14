@@ -16,7 +16,7 @@ export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
 
-//! User
+//! User Reducer
 
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const SET_AUTHENTICATED = "SET_AUTHENTICATED";
@@ -30,3 +30,13 @@ export const FETCH_USER_DATA_FAILED = "FETCH_USER_DATA_FAILED";
 export const LOADING_UI = "LOADING_UI";
 export const SET_ERRORS = "SET_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
+
+//! Data Reducer
+
+export const SCREAMS_REQUEST = "SCREAM_REQUEST";
+export const SET_SCREAM = "SET_SCREAM";
+export const SET_SCREAMS = "SET_SCREAMS";
+export const SCREAMS_FAILED = "SCREAM_FAILED";
+
+export const LIKE_SCREAM = "LIKE_SCREAM";
+export const UNLIKE_SCREAM = "UNLIKE_SCREAM";

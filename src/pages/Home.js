@@ -1,54 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import axios from "axios";
+import PropTypes from "prop-types";
+import { useEffectOnce } from "react-use";
 
 //! User Files
 
 import Scream from "../components/Scream";
 import Profile from "../components/profile/Profile";
+import { getScreams } from "../store/actions";
 
 //! Ant Design imports
 
 import { Affix } from "antd";
 
-const Home = () => {
-  const [loading, setLoading] = useState(true);
-  const [state, setState] = useState({ scream: null });
-  useEffect(() => {
-    axios
-      .get("/screams")
-      .then((res) => {
-        console.log(res.data);
-        setState({ scream: res.data });
-        setLoading(false);
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.log(err);
-      });
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
-
+const Home = (props) => {
+  useEffectOnce(() => {
+    props.getScreams();
+  });
   return (
     <div className="home-wrapper">
       <div className="home-left"></div>
       <div className="home-middle">
-        {state.scream && <Scream scream={state.scream} />}
+        <Scream
+          screams={props.dataReducer.screams}
+          loading={props.dataReducer.isLoading}
+        />
       </div>
       <div className="home-right">
-        {window.innerWidth > 1000 && (
-          <Affix offsetTop={96}>
-            <Profile />
-          </Affix>
-        )}
+        {/* {window.innerWidth > 1000 && ( */}
+        <Affix offsetTop={96}>
+          <Profile />
+        </Affix>
+        {/* )} */}
       </div>
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({});
+Home.propTypes = {
+  getScreams: PropTypes.func.isRequired,
+  dataReducer: PropTypes.object.isRequired,
+};
 
-const mapDispatchToProps = {};
+const mapStateToProps = (state) => ({
+  dataReducer: state.dataReducer,
+});
+
+const mapDispatchToProps = { getScreams };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

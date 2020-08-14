@@ -23,6 +23,7 @@ const Profile = (props) => {
   const { isAuthenticated, isProfileLoading, userData } = props.userReducer;
 
   const onChange = (e) => {
+    // TODO: If size is greater than 3 MB, throw Error
     const image = e.target.files[0];
     const formData = new FormData();
     formData.append("image", image, image.name);
@@ -44,13 +45,15 @@ const Profile = (props) => {
         cover={
           <Fragment>
             <div className="picture-wrapper">
-              <UserImage
-                img={userData.credentials.imageUrl}
-                alt={userData.credentials.handle}
-                onChange={onChange}
-                handleUpload={handleUpload}
-                PRIMARY_COLOR={PRIMARY_COLOR}
-              />
+              <div className="user-avatar">
+                <UserImage
+                  img={userData.credentials.imageUrl}
+                  alt={userData.credentials.handle}
+                  onChange={onChange}
+                  handleUpload={handleUpload}
+                  PRIMARY_COLOR={PRIMARY_COLOR}
+                />
+              </div>
             </div>
             <EditDetails />
           </Fragment>
