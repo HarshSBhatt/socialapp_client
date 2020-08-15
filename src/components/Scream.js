@@ -19,7 +19,6 @@ import { Link } from "react-router-dom";
 const PRIMARY_COLOR = "#00bcd4";
 
 function Scream(props) {
-  console.log(props.isLikeUnlikeRunning);
   const { isAuthenticated, userData } = props.userReducer;
   dayjs.extend(relativeTime);
 

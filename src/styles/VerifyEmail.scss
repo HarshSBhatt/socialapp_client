@@ -1,0 +1,9 @@
+.verify-email-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .error-message {
+    padding: 0 2rem;
+    max-width: 600px;
+  }
+}

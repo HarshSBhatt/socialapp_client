@@ -28,3 +28,8 @@ code {
 .ant-notification-notice-message {
   font-size: 14px !important;
 }
+
+.verify-button button {
+  margin: 1rem;
+  min-width: 150px;
+}

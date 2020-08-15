@@ -34,12 +34,12 @@ function PrivateRoute({ component: Component, isAuthenticated, ...rest }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.userReducer.isAuthenticated,
-});
-
 PrivateRoute.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.userReducer.isAuthenticated,
+});
 
 export default connect(mapStateToProps)(PrivateRoute);

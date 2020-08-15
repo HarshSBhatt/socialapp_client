@@ -96,6 +96,43 @@ export const loginUser = (userData) => (dispatch) => {
     });
 };
 
+//! Send verification mail again
+
+export const requestVerificationEmail = () => {
+  return {
+    type: ActionTypes.VERIFY_START,
+  };
+};
+
+export const receiveVerificationEmail = (data) => {
+  return {
+    type: ActionTypes.VERIFY_SUCCESS,
+    payload: data,
+  };
+};
+
+export const verificationEmailError = (message) => {
+  return {
+    type: ActionTypes.VERIFY_FAILED,
+    payload: message,
+  };
+};
+
+export const sendVerificationMail = () => (dispatch) => {
+  dispatch(requestVerificationEmail());
+  axios
+    .post("/resendVerificationMail")
+    .then((res) => {
+      dispatch(receiveVerificationEmail(res.data.success));
+      if (!res.data.success) {
+        dispatch(verificationEmailError(res.data.err));
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 //! Get User Data
 
 export const requestForUserData = () => {

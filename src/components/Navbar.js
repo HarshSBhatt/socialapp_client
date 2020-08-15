@@ -1,32 +1,66 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
+//! user Files
+
+import MyButton from "./MyButton";
 
 //! MUI imports
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
+import AddIcon from "@material-ui/icons/Add";
+import HomeIcon from "@material-ui/icons/Home";
+import Notifications from "@material-ui/icons/Notifications";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const { isAuthenticated } = props;
+
   return (
     <AppBar position="fixed">
       <Toolbar className="navbar-container">
-        <Button color="inherit" component={Link} to="/login">
-          Login
-        </Button>
-        <Button color="inherit" component={Link} to="/">
-          Home
-        </Button>
-        <Button color="inherit" component={Link} to="/signup">
-          Signup
-        </Button>
+        {isAuthenticated ? (
+          <Fragment>
+            <MyButton tip="Post a Scream">
+              <AddIcon color="primary" />
+            </MyButton>
+            <Link to="/">
+              <MyButton tip="Home">
+                <HomeIcon color="primary" />
+              </MyButton>
+            </Link>
+            <MyButton tip="Notifications">
+              <Notifications color="primary" />
+            </MyButton>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <Button color="inherit" component={Link} to="/login">
+              Login
+            </Button>
+            <Button color="inherit" component={Link} to="/">
+              Home
+            </Button>
+            <Button color="inherit" component={Link} to="/signup">
+              Signup
+            </Button>
+          </Fragment>
+        )}
       </Toolbar>
     </AppBar>
   );
 };
 
-const mapStateToProps = (state) => ({});
+Navbar.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.userReducer.isAuthenticated,
+});
 
 const mapDispatchToProps = {};
 

@@ -6,6 +6,7 @@ const initialState = {
   isProfileLoading: false,
   isAuthenticated: false,
   token: localStorage.getItem("authToken"),
+  verifyEmail: { loading: false, error: null, success: false },
   user: {},
   userData: {},
   errMess: null,
@@ -39,6 +40,36 @@ export const UserReducer = (state = initialState, action) => {
         errMess: action.message,
       };
 
+    //! Email verification
+
+    case ActionTypes.VERIFY_START:
+      return {
+        ...state,
+        verifyEmail: {
+          ...state.verifyEmail,
+          loading: true,
+        },
+      };
+    case ActionTypes.VERIFY_SUCCESS:
+      return {
+        ...state,
+        verifyEmail: {
+          ...state.verifyEmail,
+          loading: false,
+          error: null,
+          success: action.payload,
+        },
+      };
+    case ActionTypes.VERIFY_FAILED:
+      return {
+        ...state,
+        verifyEmail: {
+          ...state.verifyEmail,
+          loading: false,
+          success: false,
+          error: action.payload,
+        },
+      };
     //! Login
 
     case ActionTypes.LOGIN_REQUEST:
