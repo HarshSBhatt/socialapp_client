@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 
 //! User Files
 
-import MyButton from "./MyButton";
-import { postScream } from "../store/actions";
+import MyButton from "../MyButton";
+import { postScream } from "../../store/actions";
 
 //! MUI Imports
 
@@ -16,7 +16,6 @@ import AddIcon from "@material-ui/icons/Add";
 import { Modal, Form, Input } from "antd";
 
 const PostScream = (props) => {
-  console.log(props);
   const [form] = Form.useForm();
 
   const [modalState, setModalState] = useState({

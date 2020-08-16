@@ -6,9 +6,10 @@ import PropTypes from "prop-types";
 
 //! User Files
 
-import { ReactComponent as VerifiedIcon } from "../assets/verified_badge.svg";
-import { likeScream, unlikeScream } from "../store/actions";
+import { ReactComponent as VerifiedIcon } from "../../assets/verified_badge.svg";
+import { likeScream, unlikeScream } from "../../store/actions";
 import DeleteScream from "./DeleteScream";
+import ScreamModal from "./ScreamModal";
 
 //! Ant Design imports
 
@@ -105,6 +106,10 @@ function Scream(props) {
                   </div>
                 </Link>
                 <div className="user-actions">
+                  <ScreamModal
+                    userHandle={item.userHandle}
+                    screamId={item.screamId}
+                  />
                   <DeleteButton
                     userHandle={item.userHandle}
                     screamId={item.screamId}
@@ -114,7 +119,7 @@ function Scream(props) {
             }
             description={dayjs(item.createdAt).fromNow()}
           />
-          {item.body}
+          <div className="scream-body">{item.body}</div>
         </List.Item>
       )}
     />

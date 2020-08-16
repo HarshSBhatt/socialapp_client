@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 //! User Files
 
-import { editUserDetails } from "../store/actions";
+import { editUserDetails } from "../../store/actions";
 
 //! Ant Design Imports
 

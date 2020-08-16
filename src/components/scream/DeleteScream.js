@@ -4,11 +4,13 @@ import PropTypes from "prop-types";
 
 //! User Files
 
+import { deleteScream } from "../../store/actions";
+import MyButton from "../MyButton";
+
 //! Ant Design Imports
 
-import { Button, Popover, Modal } from "antd";
-import { MoreOutlined, QuestionCircleOutlined } from "@ant-design/icons";
-import { deleteScream } from "../store/actions";
+import { Modal } from "antd";
+import { QuestionCircleOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const DeleteScream = (props) => {
   const { screamId } = props;
@@ -26,17 +28,11 @@ const DeleteScream = (props) => {
     });
   }
 
-  const content = (
-    <Button danger type="text" onClick={confirm}>
-      Delete
-    </Button>
-  );
-
   return (
-    <div>
-      <Popover content={content} placement="bottomRight" trigger="click">
-        <MoreOutlined />
-      </Popover>
+    <div className="delete-scream-wrapper">
+      <MyButton tip="Delete" onClick={confirm}>
+        <DeleteOutlined />
+      </MyButton>
     </div>
   );
 };

@@ -23,6 +23,7 @@ export const DataReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         screams: action.screams,
+        error: null,
       };
     case ActionTypes.SCREAMS_FAILED:
       return {
@@ -30,6 +31,36 @@ export const DataReducer = (state = initialState, action) => {
         isLoading: false,
         screams: [],
         error: action.error,
+      };
+
+    //! Get single scream
+
+    case ActionTypes.SCREAM_REQUEST:
+      return {
+        ...state,
+        screamState: {
+          ...state.screamState,
+          isLoading: true,
+        },
+      };
+    case ActionTypes.SET_SCREAM:
+      return {
+        ...state,
+        scream: action.scream,
+        screamState: {
+          ...state.screamState,
+          isLoading: false,
+          error: null,
+        },
+      };
+    case ActionTypes.SCREAM_FAILED:
+      return {
+        ...state,
+        screamState: {
+          ...state.screamState,
+          isLoading: false,
+          error: action.error,
+        },
       };
 
     //! Post Scream

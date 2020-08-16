@@ -1,0 +1,40 @@
+@import "./Variables.scss";
+
+.scream-details {
+  .ant-modal-content {
+    .ant-modal-header,
+    .ant-modal-footer {
+      display: none;
+    }
+    .ant-modal-body {
+      .scream-loader {
+        min-height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .ant-row {
+        .user-avatar {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+        }
+        .user-info {
+          .ant-typography {
+            margin-left: 4px;
+          }
+          a {
+            .ant-typography {
+              transition: all 0.2s ease-in;
+              margin: 0;
+              margin-bottom: 0.5rem;
+              &:hover {
+                color: $primary-color;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

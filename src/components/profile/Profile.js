@@ -8,7 +8,7 @@ import { uploadImage, logoutUser } from "../../store/actions/userAction";
 import UserImage from "./UserImage";
 import UserHandle from "./UserHandle";
 import UserDetails from "./UserDetails";
-import EditDetails from "../EditDetails";
+import EditDetails from "./EditDetails";
 
 //! Ant Design imports
 

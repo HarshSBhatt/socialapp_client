@@ -28,7 +28,7 @@ export const UserReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isAuthenticated: true,
-        errMess: "",
+        errMess: null,
         token: action.token,
       };
 
@@ -117,7 +117,7 @@ export const UserReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isAuthenticated: true,
-        errMess: "",
+        errMess: null,
         token: action.token,
       };
 

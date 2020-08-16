@@ -37,6 +37,40 @@ export const getScreams = () => (dispatch) => {
     });
 };
 
+//! Get single scream
+
+export const requestForGetOneScream = () => {
+  return {
+    type: ActionTypes.SCREAM_REQUEST,
+  };
+};
+
+export const setOneScream = (scream) => {
+  return {
+    type: ActionTypes.SET_SCREAM,
+    scream,
+  };
+};
+
+export const failedToGetOneScream = (error) => {
+  return {
+    type: ActionTypes.SCREAM_FAILED,
+    error,
+  };
+};
+export const getOneScream = (screamId) => (dispatch) => {
+  dispatch(requestForGetOneScream());
+  axios
+    .get(`/scream/${screamId}`)
+    .then((res) => {
+      dispatch(setOneScream(res.data));
+    })
+    .catch((err) => {
+      dispatch(failedToGetOneScream(err.response.data));
+      console.log(err);
+    });
+};
+
 //! Post Scream
 
 export const requestToPostScream = () => {
