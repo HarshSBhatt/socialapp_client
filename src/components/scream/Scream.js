@@ -7,56 +7,19 @@ import PropTypes from "prop-types";
 //! User Files
 
 import { ReactComponent as VerifiedIcon } from "../../assets/verified_badge.svg";
-import { likeScream, unlikeScream } from "../../store/actions";
 import DeleteScream from "./DeleteScream";
 import ScreamModal from "./ScreamModal";
+import LikeButton from "../LikeButton";
 
 //! Ant Design imports
 
 import { List, Avatar, Space } from "antd";
-import { LikeOutlined, CommentOutlined, LikeFilled } from "@ant-design/icons";
+import { CommentOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-
-const PRIMARY_COLOR = "#00bcd4";
 
 function Scream(props) {
   const { isAuthenticated, userData } = props.userReducer;
   dayjs.extend(relativeTime);
-
-  const LikeButton = ({ screamId }) => {
-    const likedScream = () => {
-      if (
-        userData.likes &&
-        userData.likes.find((like) => like.screamId === screamId)
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    };
-
-    const likeScream = () => {
-      props.likeScream(screamId);
-    };
-
-    const unlikeScream = () => {
-      props.unlikeScream(screamId);
-    };
-
-    return !isAuthenticated ? (
-      <div>
-        <LikeOutlined />
-      </div>
-    ) : likedScream() ? (
-      <div onClick={unlikeScream}>
-        <LikeFilled style={{ color: PRIMARY_COLOR }} />
-      </div>
-    ) : (
-      <div onClick={likeScream}>
-        <LikeOutlined />
-      </div>
-    );
-  };
 
   const DeleteButton = ({ userHandle, screamId }) => {
     return (
@@ -129,20 +92,13 @@ function Scream(props) {
 Scream.propTypes = {
   loading: PropTypes.bool.isRequired,
   screams: PropTypes.array.isRequired,
-  likeScream: PropTypes.func.isRequired,
-  unlikeScream: PropTypes.func.isRequired,
   userReducer: PropTypes.object.isRequired,
-  isLikeUnlikeRunning: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   userReducer: state.userReducer,
-  isLikeUnlikeRunning: state.dataReducer.isLikeUnlikeRunning,
 });
 
-const mapDispatchToProps = {
-  likeScream,
-  unlikeScream,
-};
+const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Scream);

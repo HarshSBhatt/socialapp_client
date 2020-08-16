@@ -20,8 +20,22 @@
           align-items: flex-start;
         }
         .user-info {
-          .ant-typography {
-            margin-left: 4px;
+          .like-comment-row {
+            .ant-space {
+              margin-right: 2.5rem;
+              &-item:first-child {
+                font-size: 20px;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+                &:hover {
+                  transform: scale(1.2);
+                  color: $primary-color;
+                }
+              }
+              &-item:last-child {
+                font-size: 16px;
+              }
+            }
           }
           a {
             .ant-typography {

@@ -7,18 +7,18 @@ import { Link } from "react-router-dom";
 
 import { getOneScream } from "../../store/actions";
 import MyButton from "../MyButton";
+import LikeButton from "../LikeButton";
 
 //! Ant Design Imports
-import { ArrowsAltOutlined } from "@ant-design/icons";
-import { Modal, Spin, Row, Col, Divider, Typography } from "antd";
+import { ArrowsAltOutlined, CommentOutlined } from "@ant-design/icons";
+import { Modal, Spin, Row, Col, Divider, Typography, Space } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
-
 const { Text, Title } = Typography;
 
 const ScreamModal = (props) => {
   const {
     scream: {
-      scramId,
+      screamId,
       body,
       createdAt,
       likeCount,
@@ -68,6 +68,17 @@ const ScreamModal = (props) => {
           </Text>
           <Divider />
           <Text>{body}</Text>
+          <Divider />
+          <Row className="like-comment-row">
+            <Space>
+              <LikeButton screamId={screamId} />
+              {likeCount}
+            </Space>
+            <Space>
+              <CommentOutlined />
+              {commentCount}
+            </Space>
+          </Row>
         </Col>
       </Row>
     </Fragment>

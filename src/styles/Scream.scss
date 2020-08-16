@@ -9,6 +9,9 @@
     min-height: 200px;
     margin-bottom: 1rem;
     background-color: #fff;
+    .scream-body {
+      padding: 1rem 0;
+    }
     .ant-list-item-action {
       li {
         .ant-space {
@@ -18,7 +21,16 @@
             transition: all 0.3s ease-in-out;
             &:hover {
               transform: scale(1.2);
-              color: $primary-color;
+              color: $primary-color; //! Will remove when comment implement
+            }
+            .not-authorized-to-like {
+              a {
+                color: unset;
+                &:hover {
+                  transform: scale(1.2);
+                  color: $primary-color;
+                }
+              }
             }
           }
         }
