@@ -18,6 +18,12 @@
           display: flex;
           justify-content: center;
           align-items: flex-start;
+          .ant-avatar {
+            img {
+              object-fit: contain;
+              background-color: $black;
+            }
+          }
         }
         .user-info {
           .like-comment-row {

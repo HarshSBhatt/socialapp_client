@@ -2,13 +2,12 @@
 
 .scream-list {
   .scream-list-content {
-    // .ant-list-item-main {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     min-height: 200px;
     margin-bottom: 1rem;
-    background-color: #fff;
+    background-color: $white;
     .scream-body {
       padding: 1rem 0;
     }
@@ -39,6 +38,12 @@
     .ant-list-item-meta {
       flex: unset;
       margin-bottom: 8px;
+      &-avatar {
+        img {
+          object-fit: contain;
+          background-color: $black;
+        }
+      }
       &-content {
         position: relative;
         .ant-list-item-meta-description {
@@ -83,6 +88,5 @@
     .ant-list-item-action {
       margin: 0;
     }
-    // }
   }
 }
