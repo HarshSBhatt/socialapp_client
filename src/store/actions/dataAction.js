@@ -18,7 +18,7 @@ export const setScreams = (screams) => {
   };
 };
 
-export const failedToGetScream = (error) => {
+export const failedToGetScreams = (error) => {
   return {
     type: ActionTypes.SCREAMS_FAILED,
     error,
@@ -32,7 +32,45 @@ export const getScreams = () => (dispatch) => {
       dispatch(setScreams(res.data));
     })
     .catch((err) => {
-      dispatch(failedToGetScream(err.response.data));
+      dispatch(failedToGetScreams(err.response.data));
+      console.log(err);
+    });
+};
+
+//! Post Scream
+
+export const requestToPostScream = () => {
+  return {
+    type: ActionTypes.POST_SCREAM_STATRT,
+  };
+};
+export const postScreamSuccess = (scream) => {
+  return {
+    type: ActionTypes.POST_SCREAM_SUCCESSS,
+    scream,
+  };
+};
+export const failedToPostScream = (error) => {
+  return {
+    type: ActionTypes.POST_SCREAM_FAILED,
+    error,
+  };
+};
+
+export const postScream = (newScream) => (dispatch) => {
+  dispatch(requestToPostScream());
+  axios
+    .post("/scream", newScream)
+    .then((res) => {
+      dispatch(postScreamSuccess(res.data));
+      openNotificationWithIcon("success", "Post created successfully");
+    })
+    .catch((err) => {
+      dispatch(failedToPostScream(err.response.data));
+      openNotificationWithIcon(
+        "error",
+        "Something went wrong. Please try again later!"
+      );
       console.log(err);
     });
 };

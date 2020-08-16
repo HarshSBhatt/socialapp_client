@@ -1,0 +1,20 @@
+.scream-post-modal {
+  .ant-modal-content {
+    .ant-modal-header {
+      display: flex;
+      justify-content: center;
+      .ant-modal-title {
+        font-weight: bolder;
+      }
+    }
+    .ant-modal-footer {
+      padding: 24px;
+      padding-top: 0;
+      border-top: none;
+      button {
+        width: 100%;
+        margin: 0;
+      }
+    }
+  }
+}

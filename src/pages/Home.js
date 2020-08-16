@@ -21,21 +21,19 @@ const Home = (props) => {
     <div className="home-wrapper">
       <div className="home-left"></div>
       <div className="home-middle">
-        {!props.isProfileLoading ? (
-          <Scream
-            screams={props.dataReducer.screams}
-            loading={props.dataReducer.isLoading}
-          />
-        ) : (
-          <p>Loading Data....</p>
-        )}
+        <Scream
+          screams={props.dataReducer.screams}
+          loading={props.dataReducer.isLoading}
+        />
       </div>
       <div className="home-right">
-        {/* {window.innerWidth > 1000 && ( */}
-        <Affix offsetTop={96}>
+        {window.innerWidth > 1000 ? (
+          <Affix offsetTop={96}>
+            <Profile />
+          </Affix>
+        ) : (
           <Profile />
-        </Affix>
-        {/* )} */}
+        )}
       </div>
     </div>
   );

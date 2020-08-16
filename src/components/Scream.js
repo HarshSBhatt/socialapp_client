@@ -66,6 +66,7 @@ function Scream(props) {
     );
   };
   if (props.loading) return <p>Loading Screams...</p>;
+  if (props.userReducer.isProfileLoading) return <p>Loading Screams...</p>;
   return (
     <List
       className="scream-list"
@@ -126,7 +127,6 @@ Scream.propTypes = {
   likeScream: PropTypes.func.isRequired,
   unlikeScream: PropTypes.func.isRequired,
   userReducer: PropTypes.object.isRequired,
-
   isLikeUnlikeRunning: PropTypes.bool.isRequired,
 };
 

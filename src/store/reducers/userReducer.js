@@ -7,6 +7,7 @@ const initialState = {
   isAuthenticated: false,
   token: localStorage.getItem("authToken"),
   verifyEmail: { loading: false, error: null, success: false },
+  recoverPassword: { loading: false, error: null, success: false },
   user: {},
   userData: {},
   errMess: null,
@@ -70,6 +71,38 @@ export const UserReducer = (state = initialState, action) => {
           error: action.payload,
         },
       };
+
+    //! Recover Password
+
+    case ActionTypes.RECOVERY_START:
+      return {
+        ...state,
+        recoverPassword: {
+          ...state.recoverPassword,
+          loading: true,
+        },
+      };
+    case ActionTypes.RECOVERY_SUCCESS:
+      return {
+        ...state,
+        recoverPassword: {
+          ...state.recoverPassword,
+          loading: false,
+          error: null,
+          success: action.payload,
+        },
+      };
+    case ActionTypes.RECOVERY_FAILED:
+      return {
+        ...state,
+        recoverPassword: {
+          ...state.recoverPassword,
+          loading: false,
+          success: false,
+          error: action.payload,
+        },
+      };
+
     //! Login
 
     case ActionTypes.LOGIN_REQUEST:
@@ -112,8 +145,11 @@ export const UserReducer = (state = initialState, action) => {
         isProfileLoading: false,
         isAuthenticated: false,
         token: "",
+        verifyEmail: { loading: false, error: null, success: false },
+        recoverPassword: { loading: false, error: null, success: false },
         user: null,
         userData: null,
+        errMess: null,
       };
 
     //! User data

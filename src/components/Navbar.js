@@ -6,13 +6,13 @@ import PropTypes from "prop-types";
 //! user Files
 
 import MyButton from "./MyButton";
+import PostScream from "./PostScream";
 
 //! MUI imports
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
-import AddIcon from "@material-ui/icons/Add";
 import HomeIcon from "@material-ui/icons/Home";
 import Notifications from "@material-ui/icons/Notifications";
 
@@ -24,9 +24,7 @@ const Navbar = (props) => {
       <Toolbar className="navbar-container">
         {isAuthenticated ? (
           <Fragment>
-            <MyButton tip="Post a Scream">
-              <AddIcon color="primary" />
-            </MyButton>
+            <PostScream />
             <Link to="/">
               <MyButton tip="Home">
                 <HomeIcon color="primary" />

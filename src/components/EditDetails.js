@@ -18,7 +18,11 @@ const EditDetails = (props) => {
     website: "",
     location: "",
   });
-  const [visible, setVisible] = useState(false);
+
+  const [modalState, setModalState] = useState({
+    visible: false,
+    confirmLoading: false,
+  });
 
   const mapUserDetailsToState = (credentials) => {
     setUserData({
@@ -32,18 +36,39 @@ const EditDetails = (props) => {
     mapUserDetailsToState(props.credentials);
   }, [props.credentials]);
 
+  useEffect(() => {
+    !props.isProfileLoading &&
+      setModalState((prevModalState) => {
+        return {
+          ...prevModalState,
+          visible: false,
+          confirmLoading: false,
+        };
+      });
+  }, [props.isProfileLoading]);
+
   const handleButtonClick = () => {
+    setModalState({
+      ...modalState,
+      visible: true,
+    });
     form.setFieldsValue({
       ...userData,
     });
-    setVisible(true);
   };
 
   const handleCancel = () => {
-    setVisible(false);
+    setModalState({
+      ...modalState,
+      visible: false,
+    });
   };
 
   const onCreate = (values) => {
+    setModalState({
+      ...modalState,
+      confirmLoading: true,
+    });
     const userDetails = {
       website: values.website,
       location: `${values.location[0].toUpperCase()}${values.location.substr(
@@ -52,7 +77,6 @@ const EditDetails = (props) => {
       bio: `${values.bio[0].toUpperCase()}${values.bio.substr(1)}`,
     };
     props.editUserDetails(userDetails);
-    setVisible(false);
   };
 
   return (
@@ -64,12 +88,12 @@ const EditDetails = (props) => {
       </Tooltip>
 
       <Modal
-        visible={visible}
+        visible={modalState.visible}
         title="Edit your profile information"
-        okText="Update"
+        okText={modalState.confirmLoading ? "Updating" : "Update"}
         cancelText="Cancel"
         onCancel={handleCancel}
-        confirmLoading={props.isProfileLoading}
+        confirmLoading={modalState.confirmLoading}
         onOk={() => {
           form
             .validateFields()

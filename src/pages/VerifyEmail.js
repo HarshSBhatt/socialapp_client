@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 //! User Files
 
@@ -63,6 +64,12 @@ const VerifyEmail = (props) => {
       </div>
     </div>
   );
+};
+
+VerifyEmail.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+  success: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({

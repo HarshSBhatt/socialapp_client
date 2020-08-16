@@ -130,6 +130,52 @@ export const sendVerificationMail = () => (dispatch) => {
     })
     .catch((err) => {
       console.log(err);
+      dispatch(
+        verificationEmailError(
+          "Error occured on server side. Please try again later!"
+        )
+      );
+    });
+};
+
+//! Recover Password
+
+export const recoveryStart = () => {
+  return {
+    type: ActionTypes.RECOVERY_START,
+  };
+};
+
+export const recoverySuccess = (data) => {
+  return {
+    type: ActionTypes.RECOVERY_SUCCESS,
+    payload: data,
+  };
+};
+
+export const recoveryFail = (message) => {
+  return {
+    type: ActionTypes.RECOVERY_FAILED,
+    payload: message,
+  };
+};
+
+export const recoverPassword = (email) => (dispatch) => {
+  console.log(email);
+  dispatch(recoveryStart());
+  axios
+    .post("/recoverPassword", email)
+    .then((res) => {
+      dispatch(recoverySuccess(res.data.success));
+      if (!res.data.success) {
+        dispatch(recoveryFail(res.data.err));
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch(
+        recoveryFail("Error occured on server side. Please try again later!")
+      );
     });
 };
 

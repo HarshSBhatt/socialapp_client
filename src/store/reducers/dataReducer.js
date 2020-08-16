@@ -5,6 +5,7 @@ const initialState = {
   scream: {},
   screams: [],
   isLikeUnlikeRunning: false,
+  screamState: { isLoading: false, error: null },
   error: null,
 };
 
@@ -29,6 +30,36 @@ export const DataReducer = (state = initialState, action) => {
         isLoading: false,
         screams: [],
         error: action.error,
+      };
+
+    //! Post Scream
+
+    case ActionTypes.POST_SCREAM_STATRT:
+      return {
+        ...state,
+        screamState: {
+          ...state.screamState,
+          isLoading: true,
+        },
+      };
+    case ActionTypes.POST_SCREAM_SUCCESSS:
+      return {
+        ...state,
+        screams: [action.scream, ...state.screams],
+        screamState: {
+          ...state.screamState,
+          isLoading: false,
+          error: null,
+        },
+      };
+    case ActionTypes.POST_SCREAM_FAILED:
+      return {
+        ...state,
+        screamState: {
+          ...state.screamState,
+          isLoading: false,
+          error: action.error,
+        },
       };
 
     //! Like or Unlike screams
