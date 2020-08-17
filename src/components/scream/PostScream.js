@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 //! User Files
 
-import MyButton from "../MyButton";
+import MyButton from "../layout/MyButton";
 import { postScream } from "../../store/actions";
 
 //! MUI Imports

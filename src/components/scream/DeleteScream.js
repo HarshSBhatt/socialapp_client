@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 //! User Files
 
 import { deleteScream } from "../../store/actions";
-import MyButton from "../MyButton";
+import MyButton from "../layout/MyButton";
 
 //! Ant Design Imports
 

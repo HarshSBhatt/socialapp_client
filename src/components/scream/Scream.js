@@ -9,7 +9,8 @@ import PropTypes from "prop-types";
 import { ReactComponent as VerifiedIcon } from "../../assets/verified_badge.svg";
 import DeleteScream from "./DeleteScream";
 import ScreamModal from "./ScreamModal";
-import LikeButton from "../LikeButton";
+import LikeButton from "./LikeButton";
+import isEmpty from "../../utils/is-empty";
 
 //! Ant Design imports
 
@@ -18,7 +19,7 @@ import { CommentOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 function Scream(props) {
-  const { isAuthenticated, userData } = props.userReducer;
+  const { isAuthenticated, userData } = props;
   dayjs.extend(relativeTime);
 
   const DeleteButton = ({ userHandle, screamId }) => {
@@ -30,7 +31,7 @@ function Scream(props) {
     );
   };
   if (props.loading) return <p>Loading Screams...</p>;
-  if (props.userReducer.isProfileLoading) return <p>Loading Screams...</p>;
+  if (isEmpty(userData)) return <p>Loading Screams...</p>;
   return (
     <List
       className="scream-list"
@@ -92,11 +93,13 @@ function Scream(props) {
 Scream.propTypes = {
   loading: PropTypes.bool.isRequired,
   screams: PropTypes.array.isRequired,
-  userReducer: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  userData: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  userReducer: state.userReducer,
+  isAuthenticated: state.userReducer.isAuthenticated,
+  userData: state.userReducer.userData,
 });
 
 const mapDispatchToProps = {};

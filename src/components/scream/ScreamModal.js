@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 //! User Files
 
 import { getOneScream } from "../../store/actions";
-import MyButton from "../MyButton";
-import LikeButton from "../LikeButton";
+import MyButton from "../layout/MyButton";
+import LikeButton from "./LikeButton";
 
 //! Ant Design Imports
 import { ArrowsAltOutlined, CommentOutlined } from "@ant-design/icons";

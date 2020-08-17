@@ -12,7 +12,7 @@ import "./styles/App.scss";
 import customTheme from "./utils/theme";
 import { ConfigureStore } from "./store/configureStore";
 import Routing from "./routes/Routing";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/layout/Navbar";
 import { setAuthHeader } from "./utils/setAuthHeader";
 import { setCurrentUser, logoutUser, getUserData } from "./store/actions";
 

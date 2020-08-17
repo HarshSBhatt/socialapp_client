@@ -23,7 +23,7 @@ function Routing(props) {
   if (isAuthenticated && !isEmpty(user) && !user.email_verified) {
     routes = (
       <Switch>
-        <PrivateRoute exact path="/verify-email" component={VerifyEmail} />
+        <Route exact path="/verify-email" component={VerifyEmail} />
         <Redirect to="/verify-email" />
       </Switch>
     );

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 //! User Files
 
-import { likeScream, unlikeScream } from "../store/actions";
+import { likeScream, unlikeScream } from "../../store/actions";
 
 //! Ant Design Imports
 

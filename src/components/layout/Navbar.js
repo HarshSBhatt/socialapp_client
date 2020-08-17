@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 //! user Files
 
 import MyButton from "./MyButton";
-import PostScream from "./scream/PostScream";
+import PostScream from "../scream/PostScream";
 
 //! MUI imports
 
