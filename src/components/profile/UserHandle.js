@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 function UserHandle({ userHandle, isVerified }) {
   return (
     <div className="username">
-      <Link to={`user/${userHandle}`}>
+      <Link to={`/user/${userHandle}`}>
         <p className="user-handle">
           <strong>{userHandle}</strong>
         </p>{" "}

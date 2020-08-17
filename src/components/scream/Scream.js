@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 //! User Files
 
@@ -11,15 +12,15 @@ import DeleteScream from "./DeleteScream";
 import ScreamModal from "./ScreamModal";
 import LikeButton from "./LikeButton";
 import isEmpty from "../../utils/is-empty";
+import ScreamSkeleton from "../utils/ScreamSkeleton";
 
 //! Ant Design imports
 
 import { List, Avatar, Space } from "antd";
 import { CommentOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
 
 function Scream(props) {
-  const { isAuthenticated, userData } = props;
+  const { isAuthenticated, userData, screamIdParam } = props;
   dayjs.extend(relativeTime);
 
   const DeleteButton = ({ userHandle, screamId }) => {
@@ -30,8 +31,8 @@ function Scream(props) {
       )
     );
   };
-  if (props.loading) return <p>Loading Screams...</p>;
-  if (isAuthenticated && isEmpty(userData)) return <p>Loading Screams...</p>;
+  if (props.loading) return <ScreamSkeleton />;
+  if (isAuthenticated && isEmpty(userData)) return <ScreamSkeleton />;
   return (
     <List
       className="scream-list"
@@ -61,7 +62,7 @@ function Scream(props) {
             }
             title={
               <div className="username">
-                <Link to={`user/${item.userHandle}`}>
+                <Link to={`/user/${item.userHandle}`}>
                   <div className="user-info">
                     <p>{item.userHandle}</p>{" "}
                     <p className="verified-badge">
@@ -70,10 +71,19 @@ function Scream(props) {
                   </div>
                 </Link>
                 <div className="user-actions">
-                  <ScreamModal
-                    userHandle={item.userHandle}
-                    screamId={item.screamId}
-                  />
+                  {screamIdParam === item.screamId ? (
+                    <ScreamModal
+                      userHandle={item.userHandle}
+                      screamId={item.screamId}
+                      openModal={true}
+                    />
+                  ) : (
+                    <ScreamModal
+                      userHandle={item.userHandle}
+                      screamId={item.screamId}
+                      openModal={false}
+                    />
+                  )}
                   <DeleteButton
                     userHandle={item.userHandle}
                     screamId={item.screamId}
@@ -95,6 +105,7 @@ Scream.propTypes = {
   screams: PropTypes.array.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   userData: PropTypes.object.isRequired,
+  screamIdParam: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({

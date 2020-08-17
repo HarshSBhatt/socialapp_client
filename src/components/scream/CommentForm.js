@@ -22,7 +22,6 @@ const CommentForm = (props) => {
   const [value, setValue] = useState("");
 
   useEffect(() => {
-    console.log("running");
     if (success === true) {
       setValue("");
     }
@@ -54,7 +53,7 @@ const CommentForm = (props) => {
       </Form.Item>
     </Fragment>
   ) : (
-    <div>
+    <div className="signin-to-comment">
       <Link to="/login">Sign in to comment</Link>
     </div>
   );

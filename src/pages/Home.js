@@ -27,7 +27,7 @@ const Home = (props) => {
         />
       </div>
       <div className="home-right">
-        {window.innerWidth > 1000 ? (
+        {window.innerWidth > 900 ? (
           <Affix offsetTop={96}>
             <Profile />
           </Affix>

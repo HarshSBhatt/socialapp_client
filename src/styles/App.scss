@@ -1,3 +1,4 @@
+@import "./Variables.scss";
 @import "./Navbar.scss";
 @import "./Login_Signup.scss";
 @import "./VerifyEmail.scss";
@@ -6,8 +7,17 @@
 @import "./ScreamModal.scss";
 @import "./Profile.scss";
 @import "./PostScream.scss";
+@import "./ScreamSkeleton.scss";
+@import "./CardSkeleton.scss";
 
 .container {
   margin-top: 64px;
   padding: 2rem 0;
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    margin-top: 56px;
+    padding: 1rem 0;
+  }
 }

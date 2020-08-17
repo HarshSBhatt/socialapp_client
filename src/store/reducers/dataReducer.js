@@ -153,7 +153,10 @@ export const DataReducer = (state = initialState, action) => {
       state.screams[likeUnlikeIndex] = action.payload;
 
       if (state.scream.screamId === action.payload.screamId) {
-        state.scream = action.payload;
+        state.scream = {
+          ...action.payload,
+          comments: state.scream.comments,
+        };
       }
 
       return {

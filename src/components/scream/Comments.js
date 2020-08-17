@@ -5,13 +5,17 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Link } from "react-router-dom";
 
+//! User Files
+
+import { ReactComponent as VerifiedIcon } from "../../assets/verified_badge.svg";
+
 //! Ant Design Imports
 
 import { Comment, List } from "antd";
 
 const Comments = (props) => {
   const { comments } = props;
-
+  console.log(comments);
   dayjs.extend(relativeTime);
 
   return (
@@ -29,8 +33,16 @@ const Comments = (props) => {
         renderItem={(item) => (
           <li>
             <Comment
+              className="comment-details"
               author={
-                <Link to={`/user/${item.userHandle}`}>{item.userHandle}</Link>
+                <Link to={`/user/${item.userHandle}`}>
+                  <p className="user-name">{item.userHandle}</p>
+                  {item.isVerified && (
+                    <p className="verified-badge">
+                      <VerifiedIcon />
+                    </p>
+                  )}
+                </Link>
               }
               avatar={item.userImage}
               content={item.body}

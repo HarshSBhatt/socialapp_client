@@ -1,8 +1,9 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+
 //! User Files
 
 import { getOneScream } from "../../store/actions";
@@ -12,6 +13,7 @@ import Comments from "./Comments";
 import CommentForm from "./CommentForm";
 
 //! Ant Design Imports
+
 import { ArrowsAltOutlined, CommentOutlined } from "@ant-design/icons";
 import { Modal, Spin, Row, Col, Divider, Typography, Space } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
@@ -36,34 +38,56 @@ const ScreamModal = (props) => {
   const [modalState, setModalState] = useState({
     visible: false,
     confirmLoading: false,
+    oldPath: "",
+    newPath: "",
   });
 
   const handleButtonClick = () => {
+    let oldPath = window.location.pathname;
+    const { userHandle, screamId } = props;
+    let newPath = `/user/${userHandle}/scream/${screamId}`;
+
+    if (oldPath === newPath) {
+      oldPath = `/user/${userHandle}`;
+    }
+
+    window.history.pushState(null, `Post from ${userHandle}`, newPath);
+
     props.getOneScream(props.screamId);
     setModalState({
       ...modalState,
       visible: true,
+      oldPath,
+      newPath,
     });
   };
 
   const handleCancel = () => {
+    window.history.pushState(null, null, modalState.oldPath);
+
     setModalState({
       ...modalState,
       visible: false,
     });
   };
+  useEffect(() => {
+    console.log("aav");
+    if (props.openModal) {
+      handleButtonClick();
+    }
+  }, [props.openModal]);
 
   const modalMarkup = isLoading ? (
     <Spin className="scream-loader" />
   ) : (
     <Fragment>
       <Row className="scream-title">
-        <Col span={4} className="user-avatar">
+        <Col span={6} className="user-avatar">
           <Avatar src={userImage} size={65}>
             {userHandle && userHandle[0].toUpperCase()}
           </Avatar>
         </Col>
-        <Col span={20} className="user-info">
+        <Col span={16} className="user-info">
           <Link to={`/user/${userHandle}`} target="_blank">
             <Title level={4}>@{userHandle}</Title>
           </Link>

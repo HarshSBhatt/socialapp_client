@@ -178,6 +178,14 @@ export const UserReducer = (state = initialState, action) => {
         userData: null,
       };
 
+    //! Notifications
+
+    case ActionTypes.MARKED_NOTIFICATIONS_READ:
+      state.userData.notifications.forEach((not) => (not.read = true));
+      return {
+        ...state,
+      };
+
     //! Like or Unlike screams
 
     case ActionTypes.LIKE_SCREAM:

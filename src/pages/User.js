@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import axios from "axios";
+import { useEffectOnce } from "react-use";
 
 //! User Files
 
@@ -14,10 +15,20 @@ import StaticProfile from "../components/profile/StaticProfile";
 import { Affix, Empty } from "antd";
 
 const User = (props) => {
-  const [state, setState] = useState({ profile: {} });
+  const [state, setState] = useState({ profile: {}, screamIdParam: null });
+
   const handle = props.match.params.handle;
+  const screamId = props.match.params.screamId;
+
   const { isLoading, screams } = props.dataReducer;
-  useEffect(() => {
+
+  useEffectOnce(() => {
+    if (screamId) {
+      setState({
+        ...state,
+        screamIdParam: screamId,
+      });
+    }
     props.getUserProfileData(handle);
     axios
       .get(`/user/${handle}`)
@@ -25,8 +36,9 @@ const User = (props) => {
         setState({ profile: res.data.user });
       })
       .catch((err) => console.log(err));
-  }, [handle]);
+  });
 
+  const { screamIdParam } = state;
   return (
     <div className="home-wrapper">
       <div className="home-left"></div>
@@ -34,13 +46,21 @@ const User = (props) => {
         {screams.length === 0 ? (
           <Empty description={`No posts to show from ${handle}`} />
         ) : (
-          <Scream screams={screams} loading={isLoading} />
+          <Scream
+            screams={screams}
+            loading={isLoading}
+            screamIdParam={screamIdParam}
+          />
         )}
       </div>
       <div className="home-right">
-        <Affix offsetTop={96}>
+        {window.innerWidth > 900 ? (
+          <Affix offsetTop={96}>
+            <StaticProfile profile={state.profile} />
+          </Affix>
+        ) : (
           <StaticProfile profile={state.profile} />
-        </Affix>
+        )}
       </div>
     </div>
   );

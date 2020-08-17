@@ -7,6 +7,7 @@ import UserImage from "./UserImage";
 import UserHandle from "./UserHandle";
 import UserDetails from "./UserDetails";
 import isEmpty from "../../utils/is-empty";
+import CardSkeleton from "../utils/CardSkeleton";
 
 //! Ant Design imports
 
@@ -23,7 +24,7 @@ function StaticProfile({ profile }) {
     location,
     isVerified,
   } = profile;
-  if (isEmpty(profile)) return <p>Loaading...</p>;
+  if (isEmpty(profile)) return <CardSkeleton />;
   return (
     <div className="profile-wrapper">
       <Card

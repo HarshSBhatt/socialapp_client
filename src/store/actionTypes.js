@@ -27,6 +27,10 @@ export const FETCH_USER_DATA_REQUEST = "FETCH_USER_DATA_REQUEST";
 export const SET_USER_DATA = "SET_USER_DATA";
 export const FETCH_USER_DATA_FAILED = "FETCH_USER_DATA_FAILED";
 
+//! Notifications
+
+export const MARKED_NOTIFICATIONS_READ = "MARKED_NOTIFICATIONS_READ";
+
 //! ---------------------Data Reducer-------------------------
 
 //! All screams
@@ -74,9 +78,3 @@ export const VERIFY_FAILED = "VERIFY_FAILED";
 export const RECOVERY_START = "RECOVERY_START";
 export const RECOVERY_SUCCESS = "RECOVERY_SUCCESS";
 export const RECOVERY_FAILED = "RECOVERY_FAILED";
-
-//! ---------------------UI Reducer-------------------------
-
-export const LOADING_UI = "LOADING_UI";
-export const SET_ERRORS = "SET_ERRORS";
-export const CLEAR_ERRORS = "CLEAR_ERRORS";

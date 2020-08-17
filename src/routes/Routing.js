@@ -35,6 +35,7 @@ function Routing(props) {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/user/:handle" component={User} />
+        <Route exact path="/user/:handle/scream/:screamId" component={User} />
         <Redirect to="/" />
       </Switch>
     );
@@ -45,6 +46,7 @@ function Routing(props) {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/user/:handle" component={User} />
+        <Route exact path="/user/:handle/scream/:screamId" component={User} />
         <Route exact path="/forgot-password" component={RecoverPassword} />
         <Redirect to="/login" />
       </Switch>

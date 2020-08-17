@@ -267,3 +267,22 @@ export const uploadImage = (formData) => (dispatch) => {
       openNotificationWithIcon("error", "Image upload failed.");
     });
 };
+
+//! Notifications
+
+export const notificationRead = () => {
+  return {
+    type: ActionTypes.MARKED_NOTIFICATIONS_READ,
+  };
+};
+
+export const markedNotificationsRead = (notificationIds) => (dispatch) => {
+  axios
+    .post("/notifications", notificationIds)
+    .then(() => {
+      dispatch(notificationRead());
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

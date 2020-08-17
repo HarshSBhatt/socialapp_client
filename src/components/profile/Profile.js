@@ -9,11 +9,10 @@ import UserImage from "./UserImage";
 import UserHandle from "./UserHandle";
 import UserDetails from "./UserDetails";
 import EditDetails from "./EditDetails";
+import CardSkeleton from "../utils/CardSkeleton";
 
 //! Ant Design imports
-
-import { Avatar, Card, Button } from "antd";
-import { Typography } from "antd";
+import { Card, Button, Typography } from "antd";
 
 const { Title } = Typography;
 const PRIMARY_COLOR = "#00bcd4";
@@ -91,15 +90,7 @@ const Profile = (props) => {
       </Card>
     )
   ) : (
-    <Card loading={isProfileLoading}>
-      <Meta
-        avatar={
-          <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-        }
-        title="Card title"
-        description="This is the description"
-      />
-    </Card>
+    <CardSkeleton />
   );
 
   return <div className="profile-wrapper">{profileMarkup}</div>;
