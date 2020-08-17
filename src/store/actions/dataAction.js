@@ -92,9 +92,12 @@ export const failedToPostScream = (error) => {
 };
 
 export const postScream = (newScream) => (dispatch) => {
+  console.log(newScream.body.replace("\n", "\n"));
   dispatch(requestToPostScream());
+  const updatedScream = { body: newScream.body.replace("\n", "\n") };
+  console.log(updatedScream);
   axios
-    .post("/scream", newScream)
+    .post("/scream", updatedScream)
     .then((res) => {
       dispatch(postScreamSuccess(res.data));
       openNotificationWithIcon("success", "Post created successfully");

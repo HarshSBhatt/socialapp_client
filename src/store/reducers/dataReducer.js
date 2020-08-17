@@ -5,8 +5,7 @@ const initialState = {
   scream: {},
   screams: [],
   isLikeUnlikeRunning: false,
-
-  screamState: { isLoading: false, error: null },
+  screamState: { sucess: false, isLoading: false, error: null },
   commentState: { sucess: false, isSubmitting: false, error: null },
   error: null,
 };
@@ -52,6 +51,7 @@ export const DataReducer = (state = initialState, action) => {
         screamState: {
           ...state.screamState,
           isLoading: false,
+          success: true,
           error: null,
         },
       };
@@ -61,6 +61,7 @@ export const DataReducer = (state = initialState, action) => {
         screamState: {
           ...state.screamState,
           isLoading: false,
+          success: false,
           error: action.error,
         },
       };

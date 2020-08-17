@@ -28,7 +28,11 @@ const Login = (props) => {
   }, [props.userReducer.errMess]);
 
   const onFinish = (values) => {
-    props.loginUser(values);
+    props.loginUser({
+      email: values.email.toLowerCase(),
+      password: values.password,
+      remember: values.remember,
+    });
   };
 
   const onClose = () => {

@@ -40,7 +40,12 @@ const Signup = (props) => {
   };
 
   const onFinish = (values) => {
-    props.signupUser(values);
+    props.signupUser({
+      handle: values.handle.toLowerCase(),
+      email: values.email.toLowerCase(),
+      password: values.password,
+      confirmPassword: values.confirmPassword,
+    });
   };
 
   const onClose = () => {

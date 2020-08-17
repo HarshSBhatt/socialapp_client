@@ -34,6 +34,12 @@ const PostScream = (props) => {
       });
   }, [props.isLoading]);
 
+  useEffect(() => {
+    if (props.success === true) {
+      form.resetFields();
+    }
+  }, [props.success]);
+
   const handleButtonClick = () => {
     setModalState({
       ...modalState,
@@ -56,7 +62,6 @@ const PostScream = (props) => {
     });
     const { body } = values;
     props.postScream({ body });
-    form.resetFields();
   };
 
   return (
@@ -118,10 +123,12 @@ const PostScream = (props) => {
 PostScream.propTypes = {
   postScream: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  success: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   isLoading: state.dataReducer.screamState.isLoading,
+  success: state.dataReducer.screamState.success,
 });
 
 const mapDispatchToProps = { postScream };
