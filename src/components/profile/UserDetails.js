@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import { MapPin, Calendar, Link as IconLink, Book } from "react-feather";
 import PropTypes from "prop-types";
 
-function UserDetails({ credentials, handleLogout, PRIMARY_COLOR }) {
+function UserDetails({ credentials, handleLogout, PRIMARY_COLOR, isStatic }) {
   return (
     <Descriptions size="small" column={1}>
       {credentials.bio && (
@@ -45,21 +45,21 @@ function UserDetails({ credentials, handleLogout, PRIMARY_COLOR }) {
         </span>
         <span>Joined {dayjs(credentials.createdAt).format("MMM YYYY")}</span>
       </Descriptions.Item>
-      <Tooltip
-        placement="bottom"
-        title="Change Profile Picture"
-        color={PRIMARY_COLOR}
-      >
-        <Button onClick={handleLogout}>Logout</Button>
-      </Tooltip>
+      {!isStatic ? (
+        <Tooltip placement="bottom" title="Logout" color={PRIMARY_COLOR}>
+          <Button type="secondary" onClick={handleLogout}>
+            Logout
+          </Button>
+        </Tooltip>
+      ) : null}
     </Descriptions>
   );
 }
 
 UserDetails.propTypes = {
   credentials: PropTypes.object.isRequired,
-  handleLogout: PropTypes.func.isRequired,
-  PRIMARY_COLOR: PropTypes.string.isRequired,
+  handleLogout: PropTypes.func,
+  PRIMARY_COLOR: PropTypes.string,
 };
 
 export default UserDetails;

@@ -8,9 +8,10 @@ import PropTypes from "prop-types";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Home from "../pages/Home";
+import User from "../pages/User";
 import RecoverPassword from "../pages/RecoverPassword";
 import VerifyEmail from "../pages/VerifyEmail";
-import PrivateRoute from "../components/PrivateRoute";
+// import PrivateRoute from "../components/PrivateRoute";
 import isEmpty from "../utils/is-empty";
 
 function Routing(props) {
@@ -33,6 +34,7 @@ function Routing(props) {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/user/:handle" component={User} />
         <Redirect to="/" />
       </Switch>
     );
@@ -42,6 +44,7 @@ function Routing(props) {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/user/:handle" component={User} />
         <Route exact path="/forgot-password" component={RecoverPassword} />
         <Redirect to="/login" />
       </Switch>

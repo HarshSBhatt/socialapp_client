@@ -55,6 +55,12 @@ export const POST_SCREAM_FAILED = "POST_SCREAM_FAILED";
 
 export const DELETE_SCREAM_SUCCESS = "DELETE_SCREAM_SUCCESS";
 
+//! Submit Comments
+
+export const SUBMIT_COMMENT_START = "SUBMT_COMMENT_START";
+export const SUBMIT_COMMENT_SUCCESS = "SUBMT_COMMENT_SUCCESS";
+export const SUBMIT_COMMENT_FAILED = "SUBMT_COMMENT_FAILED";
+
 //! ---------------------Security Reducer-------------------------
 
 //! Email verification

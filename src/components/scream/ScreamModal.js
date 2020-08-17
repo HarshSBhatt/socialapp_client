@@ -8,11 +8,14 @@ import { Link } from "react-router-dom";
 import { getOneScream } from "../../store/actions";
 import MyButton from "../layout/MyButton";
 import LikeButton from "./LikeButton";
+import Comments from "./Comments";
+import CommentForm from "./CommentForm";
 
 //! Ant Design Imports
 import { ArrowsAltOutlined, CommentOutlined } from "@ant-design/icons";
 import { Modal, Spin, Row, Col, Divider, Typography, Space } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
+
 const { Text, Title } = Typography;
 
 const ScreamModal = (props) => {
@@ -25,6 +28,7 @@ const ScreamModal = (props) => {
       commentCount,
       userImage,
       userHandle,
+      comments,
     },
     isLoading,
   } = props;
@@ -54,31 +58,43 @@ const ScreamModal = (props) => {
   ) : (
     <Fragment>
       <Row className="scream-title">
-        <Col span={5} className="user-avatar">
+        <Col span={4} className="user-avatar">
           <Avatar src={userImage} size={65}>
             {userHandle && userHandle[0].toUpperCase()}
           </Avatar>
         </Col>
-        <Col span={19} className="user-info">
+        <Col span={20} className="user-info">
           <Link to={`/user/${userHandle}`} target="_blank">
             <Title level={4}>@{userHandle}</Title>
           </Link>
           <Text type="secondary">
             {dayjs(createdAt).format("h:mm a, DD MMMM YYYY")}
           </Text>
-          <Divider />
+        </Col>
+      </Row>
+      <Divider />
+      <Row className="scream-body">
+        <Col span={24}>
           <Text>{body}</Text>
-          <Divider />
-          <Row className="like-comment-row">
-            <Space>
-              <LikeButton screamId={screamId} />
-              {likeCount}
-            </Space>
-            <Space>
-              <CommentOutlined />
-              {commentCount}
-            </Space>
-          </Row>
+        </Col>
+      </Row>
+      <Row className="like-comment-row">
+        <Space>
+          <LikeButton screamId={screamId} />
+          {likeCount}
+        </Space>
+        <Space>
+          <CommentOutlined />
+          {commentCount}
+        </Space>
+      </Row>
+      <Divider />
+      <Row className="scream-comment-form">
+        <CommentForm screamId={screamId} />
+      </Row>
+      <Row className="scream-comments">
+        <Col span={24}>
+          <Comments comments={comments} />
         </Col>
       </Row>
     </Fragment>

@@ -109,6 +109,43 @@ export const postScream = (newScream) => (dispatch) => {
     });
 };
 
+//! Post Comments
+
+export const submitCommentStart = () => {
+  return {
+    type: ActionTypes.SUBMIT_COMMENT_START,
+  };
+};
+export const submitCommentSuccess = (data) => {
+  return {
+    type: ActionTypes.SUBMIT_COMMENT_SUCCESS,
+    payload: data,
+  };
+};
+export const submitCommentFailed = (error) => {
+  return {
+    type: ActionTypes.SUBMIT_COMMENT_FAILED,
+    error,
+  };
+};
+
+export const submitComment = (screamId, body) => (dispatch) => {
+  dispatch(submitCommentStart());
+  axios
+    .post(`/scream/${screamId}/comment`, { body })
+    .then((res) => {
+      dispatch(submitCommentSuccess(res.data));
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch(submitCommentFailed(err.response.data));
+      openNotificationWithIcon(
+        "error",
+        "Something went wrong. Please try again later!"
+      );
+    });
+};
+
 //! Like Screams
 
 export const likeUnlikeRequest = () => {
@@ -184,6 +221,25 @@ export const deleteScream = (screamId) => (dispatch) => {
     })
     .catch((err) => {
       console.log(err);
+      openNotificationWithIcon(
+        "error",
+        "Something went wrong. Please try again later!"
+      );
+    });
+};
+
+//! Get User Page Details
+
+export const getUserProfileData = (userHandle) => (dispatch) => {
+  dispatch(requestForGetScreams());
+  axios
+    .get(`/user/${userHandle}`)
+    .then((res) => {
+      dispatch(setScreams(res.data.screams));
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch(failedToGetScreams());
       openNotificationWithIcon(
         "error",
         "Something went wrong. Please try again later!"

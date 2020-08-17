@@ -7,6 +7,55 @@
       display: none;
     }
     .ant-modal-body {
+      .like-comment-row {
+        .ant-space {
+          margin-right: 2rem;
+          &-item:first-child {
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            &:hover {
+              transform: scale(1.2);
+              color: $primary-color;
+            }
+          }
+          &-item:last-child {
+            font-size: 16px;
+          }
+        }
+      }
+      .scream-body {
+        padding-bottom: 1rem;
+      }
+      .scream-comment-form {
+        flex-direction: column;
+      }
+      .scream-comments {
+        .ant-comment {
+          &-inner {
+            .ant-comment-avatar {
+              img {
+                background-color: $black;
+                height: 40px;
+                width: 40px;
+                object-fit: contain;
+              }
+            }
+            .ant-comment-content {
+              &-author {
+                &-name {
+                  font-size: 14px;
+                  a {
+                    &:hover {
+                      color: $primary-color;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
       .scream-loader {
         min-height: 200px;
         display: flex;
@@ -16,7 +65,7 @@
       .ant-row {
         .user-avatar {
           display: flex;
-          justify-content: center;
+          justify-content: flex-start;
           align-items: flex-start;
           .ant-avatar {
             img {
@@ -26,23 +75,6 @@
           }
         }
         .user-info {
-          .like-comment-row {
-            .ant-space {
-              margin-right: 2.5rem;
-              &-item:first-child {
-                font-size: 20px;
-                cursor: pointer;
-                transition: all 0.3s ease-in-out;
-                &:hover {
-                  transform: scale(1.2);
-                  color: $primary-color;
-                }
-              }
-              &-item:last-child {
-                font-size: 16px;
-              }
-            }
-          }
           a {
             .ant-typography {
               transition: all 0.2s ease-in;

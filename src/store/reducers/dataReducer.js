@@ -5,7 +5,9 @@ const initialState = {
   scream: {},
   screams: [],
   isLikeUnlikeRunning: false,
+
   screamState: { isLoading: false, error: null },
+  commentState: { sucess: false, isSubmitting: false, error: null },
   error: null,
 };
 
@@ -89,6 +91,49 @@ export const DataReducer = (state = initialState, action) => {
         screamState: {
           ...state.screamState,
           isLoading: false,
+          error: action.error,
+        },
+      };
+
+    //! Post Comment
+
+    case ActionTypes.SUBMIT_COMMENT_START:
+      return {
+        ...state,
+        commentState: {
+          ...state.commentState,
+          isSubmitting: true,
+        },
+      };
+
+    case ActionTypes.SUBMIT_COMMENT_SUCCESS:
+      const curentScream = state.screams.findIndex(
+        (scream) => scream.screamId === action.payload.screamId
+      );
+      state.screams[curentScream].commentCount++;
+
+      return {
+        ...state,
+        commentState: {
+          ...state.commentState,
+          isSubmitting: false,
+          success: true,
+          error: null,
+        },
+        screams: [...state.screams],
+        scream: {
+          ...state.scream,
+          commentCount: state.scream.commentCount + 1,
+          comments: [action.payload, ...state.scream.comments],
+        },
+      };
+    case ActionTypes.SUBMIT_COMMENT_FAILED:
+      return {
+        ...state,
+        commentState: {
+          ...state.commentState,
+          isSubmitting: false,
+          success: false,
           error: action.error,
         },
       };

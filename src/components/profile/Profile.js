@@ -47,6 +47,7 @@ const Profile = (props) => {
             <div className="picture-wrapper">
               <div className="user-avatar">
                 <UserImage
+                  isStatic={false}
                   img={userData.credentials.imageUrl}
                   alt={userData.credentials.handle}
                   onChange={onChange}
@@ -71,6 +72,7 @@ const Profile = (props) => {
               credentials={userData.credentials}
               handleLogout={handleLogout}
               PRIMARY_COLOR={PRIMARY_COLOR}
+              isStatic={false}
             />
           }
         />

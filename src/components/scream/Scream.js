@@ -31,7 +31,7 @@ function Scream(props) {
     );
   };
   if (props.loading) return <p>Loading Screams...</p>;
-  if (isEmpty(userData)) return <p>Loading Screams...</p>;
+  if (isAuthenticated && isEmpty(userData)) return <p>Loading Screams...</p>;
   return (
     <List
       className="scream-list"
