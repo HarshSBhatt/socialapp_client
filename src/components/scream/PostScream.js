@@ -110,7 +110,7 @@ const PostScream = (props) => {
             ]}
           >
             <Input.TextArea
-              autoSize={{ minRows: 3, maxRows: 5 }}
+              autoSize={{ minRows: 3, maxRows: 15 }}
               placeholder="What's on you mind?"
             />
           </Form.Item>

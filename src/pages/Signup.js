@@ -86,7 +86,6 @@ const Signup = (props) => {
             <SignupError error={error.handle} onClose={onClose} />
           )}
 
-          {console.log(Object.keys(error))}
           <Form.Item
             name="handle"
             rules={[

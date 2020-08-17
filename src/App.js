@@ -4,6 +4,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import axios from "axios";
 
 //! User Files
 
@@ -19,6 +20,9 @@ import { setCurrentUser, logoutUser, getUserData } from "./store/actions";
 //! MUI Imports
 
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
+
+axios.defaults.baseURL =
+  "https://us-central1-socialapp-bf0a5.cloudfunctions.net/api";
 
 const store = ConfigureStore();
 

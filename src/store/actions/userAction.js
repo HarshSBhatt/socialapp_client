@@ -161,7 +161,6 @@ export const recoveryFail = (message) => {
 };
 
 export const recoverPassword = (email) => (dispatch) => {
-  console.log(email);
   dispatch(recoveryStart());
   axios
     .post("/recoverPassword", email)

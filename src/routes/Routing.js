@@ -15,8 +15,6 @@ import VerifyEmail from "../pages/VerifyEmail";
 import isEmpty from "../utils/is-empty";
 
 function Routing(props) {
-  // console.log(props.isAuthenticated);
-  // console.log(props.user);
   const { isAuthenticated, user } = props;
 
   let routes;

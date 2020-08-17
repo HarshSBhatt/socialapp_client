@@ -15,7 +15,6 @@ import { Comment, List } from "antd";
 
 const Comments = (props) => {
   const { comments } = props;
-  console.log(comments);
   dayjs.extend(relativeTime);
 
   return (

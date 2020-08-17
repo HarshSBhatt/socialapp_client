@@ -71,7 +71,6 @@ const ScreamModal = (props) => {
     });
   };
   useEffect(() => {
-    console.log("aav");
     if (props.openModal) {
       handleButtonClick();
     }
@@ -82,12 +81,12 @@ const ScreamModal = (props) => {
   ) : (
     <Fragment>
       <Row className="scream-title">
-        <Col span={6} className="user-avatar">
+        <Col className="user-avatar">
           <Avatar src={userImage} size={65}>
             {userHandle && userHandle[0].toUpperCase()}
           </Avatar>
         </Col>
-        <Col span={16} className="user-info">
+        <Col className="user-info">
           <Link to={`/user/${userHandle}`} target="_blank">
             <Title level={4}>@{userHandle}</Title>
           </Link>

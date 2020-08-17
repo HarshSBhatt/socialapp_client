@@ -38,7 +38,11 @@ const CommentForm = (props) => {
   return isAuthenticated ? (
     <Fragment>
       <Form.Item>
-        <TextArea rows={4} onChange={handleChange} value={value} />
+        <TextArea
+          autoSize={{ minRows: 3, maxRows: 5 }}
+          onChange={handleChange}
+          value={value}
+        />
       </Form.Item>
       <Form.Item>
         <Button
